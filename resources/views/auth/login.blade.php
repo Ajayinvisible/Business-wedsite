@@ -41,16 +41,27 @@
                                         {{-- login form --}}
                                         <form method="POST" action="{{ route('login') }}" class="my-4">
                                             @csrf
+                                            @if (session('error'))
+                                                <div class="alert alert-danger">
+                                                    {{ session('error') }}
+                                                </div>
+                                            @endif
                                             <div class="form-group mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
                                                 <input class="form-control" type="email" id="email" name="email"
                                                     required="" placeholder="Enter your email">
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <label for="password" class="form-label">Password</label>
                                                 <input class="form-control" type="password" required=""
                                                     id="password" name="password" placeholder="Enter your password">
+                                                @error('password')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group mb-0 row">
@@ -66,7 +77,8 @@
 
                                         <div class="text-center text-muted mb-4">
                                             <p class="mb-0">Don't have an account ?
-                                                <a class='text-primary ms-2 fw-medium' href='{{ route('register') }}'>Sing up</a>
+                                                <a class='text-primary ms-2 fw-medium'
+                                                    href='{{ route('register') }}'>Sing up</a>
                                             </p>
                                         </div>
 
