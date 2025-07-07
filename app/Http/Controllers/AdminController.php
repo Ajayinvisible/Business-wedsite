@@ -24,6 +24,7 @@ class AdminController extends Controller
         return redirect('/login');
     }
 
+    // 2fa login
     public function AdminLogin(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -42,5 +43,17 @@ class AdminController extends Controller
             return redirect()->route('custom.verification.form')->with('status', 'Verification code send to your email');
         }
         return redirect()->back()->withErrors(['email' => 'Invalid Credentails Provided']);
+    }
+
+    // verification page 
+    public function ShowVerification()
+    {
+        return view('auth.verify');
+    }
+
+    //
+    public function VerificationVerify(Request $request)
+    {
+
     }
 }
