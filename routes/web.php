@@ -20,4 +20,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/admi/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+Route::post('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');

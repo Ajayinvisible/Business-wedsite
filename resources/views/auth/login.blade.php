@@ -39,7 +39,7 @@
 
                                     <div class="pt-0">
                                         {{-- login form --}}
-                                        <form method="POST" action="{{ route('login') }}" class="my-4">
+                                        <form method="POST" action="{{ route('admin.login') }}" class="my-4">
                                             @csrf
                                             @if (session('error'))
                                                 <div class="alert alert-danger">
