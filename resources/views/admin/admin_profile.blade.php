@@ -1,6 +1,8 @@
 @extends('admin.admin_mater')
 
 @section('admin')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <div class="content">
 
         <div class="content">
@@ -101,13 +103,14 @@
                                                                 <label class="form-label">Profile Photo</label>
                                                                 <div class="col-lg-12 col-xl-12">
                                                                     <input name="photo" class="form-control"
-                                                                        type="file">
+                                                                        type="file" id="image">
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group mb-3 row">
                                                                 <div class="col-lg-12 col-xl-12">
-                                                                    <img src="{{ !empty($profileData->photo) ? url('upload/user_iamge' . $profileData->photo) : url('upload/no_image.jpg') }}"
+                                                                    <img id="showImage"
+                                                                        src="{{ !empty($profileData->photo) ? url('upload/user_iamge' . $profileData->photo) : url('upload/no_image.jpg') }}"
                                                                         class="rounded-circle avatar-xxl img-thumbnail float-start"
                                                                         alt="image profile">
                                                                 </div>
@@ -181,4 +184,15 @@
             </div>
             <!-- container-fluid -->
         </div> <!-- content -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#image').change(function(e) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#showImage').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(e.target.files[0]);
+                })
+            })
+        </script>
     @endsection
