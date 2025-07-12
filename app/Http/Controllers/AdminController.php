@@ -51,7 +51,7 @@ class AdminController extends Controller
         return view('auth.verify');
     }
 
-    // verification
+    // 2fa verification 
     public function VerificationVerify(Request $request)
     {
         $request->validate(['code' => 'required|numeric']);
@@ -66,12 +66,49 @@ class AdminController extends Controller
         return back()->withErrors(['code' => 'Invalid Verification Code']);
     }
 
+    // fetch current user data
     public function AdminProfile()
     {
         $id = Auth::user()->id;
         $profileData = User::find($id);
-        return view('admin.admin_profile',[
+        return view('admin.admin_profile', [
             'profileData' => $profileData
         ]);
+    }
+
+    // 
+    public function ProfileStore(Request $request)
+    {
+        $id = Auth::user()->id;
+        $data = User::find($id);
+
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+
+        $oldPhotoPath = $data->photo;
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('upload/user_images'), $fileName);
+            $data->photo = $fileName;
+
+            if ($oldPhotoPath && $oldPhotoPath !== $fileName) {
+                $this->deleteOldImage($oldPhotoPath);
+            }
+        }
+        $data->save();
+        return back()->with('success', 'Profile Updated Successfully');
+    }
+
+    // unlink old image
+    private function deleteOldImage(string $oldPhotoPath): void
+    {
+        $fullPath = public_path('upload/user_images/' . $oldPhotoPath);
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 }
