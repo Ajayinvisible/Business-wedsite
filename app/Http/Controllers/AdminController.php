@@ -100,7 +100,11 @@ class AdminController extends Controller
             }
         }
         $data->save();
-        return back()->with('success', 'Profile Updated Successfully');
+        $notification = array(
+            'message' => 'Profile Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
     }
 
     // unlink old image
