@@ -115,4 +115,10 @@ class AdminController extends Controller
             unlink($fullPath);
         }
     }
+
+    // update password
+    public function PasswordUpdate(Request $request)
+    {
+        
+    }
 }
