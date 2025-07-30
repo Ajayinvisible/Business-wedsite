@@ -36,7 +36,7 @@ class ReviewController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $manager = new ImageManager(new Driver());
-            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $name_gen = hexdec(uniqid()) . '.' . "webp";
 
             $uploadPath = public_path('upload/review');
 
@@ -46,7 +46,8 @@ class ReviewController extends Controller
             }
             
             $img = $manager->read($image);
-            $img->resize(60, 60)->save(public_path('upload/review/' . $name_gen));
+            // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
+            $img->resize(60, 60)->toWebp(80)->save(public_path('upload/review/' . $name_gen));
             $save_url = 'upload/review/' . $name_gen;
 
             Review::create([

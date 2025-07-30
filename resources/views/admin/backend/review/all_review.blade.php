@@ -24,12 +24,12 @@
                             <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>S.n</th>
+                                        <th width="3%">S.n</th>
                                         <th>Name</th>
                                         <th>Position</th>
                                         <th>Image</th>
                                         <th>Message</th>
-                                        <th>Action</th>
+                                        <th width="9%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,10 +42,11 @@
                                                 <img src="{{ asset($review->image) }}" alt="{{ $review->name }}"
                                                     class="rounded-circle" style="width: 50px; height: 50px;">
                                             </td>
-                                            <td>{!! $review->message !!}</td>
+                                            <td>{!! Str::limit($review->message, 50, '...') !!}</td>
                                             <td>
-                                                <a href="" class="btn btn-success rounded-pill">Success</a>
-                                                <a href="" type="button" class="btn btn-danger rounded-pill">Danger</a>
+                                                <a href="" class="btn btn-success rounded"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="" type="button"
+                                                    class="btn btn-danger rounded"><i class="fa-solid fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
