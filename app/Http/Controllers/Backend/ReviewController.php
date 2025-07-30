@@ -17,4 +17,10 @@ class ReviewController extends Controller
             'reviews' => $reviews
         ]);
     }
+
+    public function AddReview()
+    {
+        // Logic to show the form for adding a new review
+        return view('admin.backend.review.add_review');
+    }
 }
