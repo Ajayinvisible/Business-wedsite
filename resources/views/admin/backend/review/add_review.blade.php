@@ -26,7 +26,7 @@
 
                         <div class="card-body">
 
-                            <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('store.review') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
@@ -56,16 +56,14 @@
                                     <div class="form-group mb-3 row">
                                         <label class="form-label">Message</label>
                                         <div class="col-lg-12 col-xl-12">
-
                                             <textarea name="message" id="message" class="form-control" cols="20" rows="5"></textarea>
-
                                         </div>
                                     </div>
 
                                     <div class="form-group mb-3 row">
                                         <label class="form-label">User Photo</label>
                                         <div class="col-lg-12 col-xl-12">
-                                            <input name="photo" class="form-control" type="file" id="image">
+                                            <input name="image" class="form-control" type="file" id="image">
                                         </div>
                                     </div>
 
