@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 // image intervention library for image manipulation
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -36,6 +37,14 @@ class ReviewController extends Controller
             $image = $request->file('image');
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+
+            $uploadPath = public_path('upload/review');
+
+            // Check if the folder exists, if not create it
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true); // 0755 permission, recursive
+            }
+            
             $img = $manager->read($image);
             $img->resize(60, 60)->save(public_path('upload/review/' . $name_gen));
             $save_url = 'upload/review/' . $name_gen;
