@@ -44,7 +44,7 @@ class ReviewController extends Controller
             if (!File::exists($uploadPath)) {
                 File::makeDirectory($uploadPath, 0755, true); // 0755 permission, recursive
             }
-            
+
             $img = $manager->read($image);
             // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
             $img->resize(60, 60)->toWebp(80)->save(public_path('upload/review/' . $name_gen));
@@ -66,4 +66,61 @@ class ReviewController extends Controller
         return redirect()->route('all.review')->with($notification);
     }
     //end store review method
+
+    public function EditReview($id)
+    {
+        // Logic to show the form for editing a review
+        $review = Review::findOrFail($id);
+        return view('admin.backend.review.edit_review', compact('review'));
+    }
+    // edit review view method
+
+    public function UpdateReview(Request $request, $id)
+    {
+        // Logic to update a review
+        $rev_id = $request->id;
+        // image upload and resizing logic
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()) . '.' . "webp";
+
+            $uploadPath = public_path('upload/review');
+
+            // Check if the folder exists, if not create it
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true); // 0755 permission, recursive
+            }
+
+            $img = $manager->read($image);
+            // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
+            $img->resize(60, 60)->toWebp(80)->save(public_path('upload/review/' . $name_gen));
+            $save_url = 'upload/review/' . $name_gen;
+
+            Review::find($rev_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+                'image' => $save_url,
+            ]);
+            // Redirect to the all reviews page with a success message
+            $notification = array(
+                'message' => 'Review Updated With Image Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('all.review')->with($notification);
+        } else {
+            Review::find($rev_id)->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+            ]);
+            // Redirect to the all reviews page with a success message
+            $notification = array(
+                'message' => 'Review Updated Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('all.review')->with($notification);
+        }
+    }
 }

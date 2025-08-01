@@ -44,7 +44,7 @@
                                             </td>
                                             <td>{!! Str::limit($review->message, 50, '...') !!}</td>
                                             <td>
-                                                <a href="" class="btn btn-success rounded"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="{{ route('edit.review', $review->id) }}" class="btn btn-success rounded"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <a href="" type="button"
                                                     class="btn btn-danger rounded"><i class="fa-solid fa-trash"></i></a>
                                             </td>
