@@ -123,4 +123,21 @@ class ReviewController extends Controller
             return redirect()->route('all.review')->with($notification);
         }
     }
+    // end update review method
+
+    public function DeleteReview($id)
+    {
+        $item = Review::findOrFail($id);
+        $imagePath = public_path($item->image);
+        unlink($imagePath); // Delete the image file from the server
+
+        Review::findOrFail($id)->delete();
+        // Redirect to the all reviews page with a success message
+        // Redirect to the all reviews page with a success message
+        $notification = array(
+            'message' => 'Review Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.review')->with($notification);
+    }
 }
