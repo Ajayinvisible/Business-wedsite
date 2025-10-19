@@ -11,7 +11,7 @@
             <div class="container-xxl">
                 <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                     {{-- <div class="flex-grow-1">
-                        <h4 class="fs-18 fw-semibold m-0">Add Review</h4>
+                        <h4 class="fs-18 fw-semibold m-0">Add slider</h4>
                     </div> --}}
                 </div>
             </div>
@@ -21,16 +21,16 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Edit Review</h5>
+                            <h5 class="card-title mb-0">Edit Slider</h5>
                         </div><!-- end card header -->
 
                         <div class="card-body">
 
-                            <form action="{{ route('update.review', $review->id) }}" method="POST"
+                            <form action="{{ route('update.slider', $slider->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="id" value="{{ $review->id }}">
+                                <input type="hidden" name="id" value="{{ $slider->id }}">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -38,8 +38,8 @@
                                             <div class="form-group mb-3 row">
                                                 <label class="form-label">Name</label>
                                                 <div class="col-lg-6 col-xl-12">
-                                                    <input class="form-control" type="text" name="name"
-                                                        value="{{ $review->name }}" />
+                                                    <input class="form-control" type="text" name="title"
+                                                        value="{{ $slider->title }}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -47,10 +47,10 @@
                                         <div class="col-lg-6">
 
                                             <div class="form-group mb-3 row">
-                                                <label class="form-label">Position</label>
+                                                <label class="form-label">Link</label>
                                                 <div class="col-lg-6 col-xl-12">
-                                                    <input type="text" class="form-control" name="position"
-                                                        value="{{ $review->position }}">
+                                                    <input type="text" class="form-control" name="link"
+                                                        value="{{ $slider->link }}">
                                                 </div>
 
                                             </div>
@@ -58,14 +58,14 @@
                                     </div>
 
                                     <div class="form-group mb-3 row">
-                                        <label class="form-label">Message</label>
+                                        <label class="form-label">Description</label>
                                         <div class="col-lg-12 col-xl-12">
-                                            <textarea name="message" id="message" class="form-control" cols="20" rows="5">{{ $review->message }}</textarea>
+                                            <textarea name="description" id="description" class="form-control" cols="20" rows="5">{{ $slider->description }}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="form-group mb-3 row">
-                                        <label class="form-label">User Photo</label>
+                                        <label class="form-label">Slider Photo</label>
                                         <div class="col-lg-12 col-xl-12">
                                             <input name="image" class="form-control" type="file" id="image">
                                         </div>
@@ -74,7 +74,7 @@
                                     <div class="form-group mb-3 row">
                                         <div class="col-lg-12 col-xl-12">
                                             <img id="showImage"
-                                                src="{{ !empty($review->image) ? url($review->image) : url('upload/no_image.jpg') }}"
+                                                src="{{ !empty($slider->image) ? url($slider->image) : url('upload/no_image.jpg') }}"
                                                 class="rounded-circle avatar-md img-thumbnail float-start"
                                                 alt="image profile">
                                         </div>
