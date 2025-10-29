@@ -57,12 +57,12 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarAuth" data-bs-toggle="collapse">
+                    <a href="#sliderAuth" data-bs-toggle="collapse">
                         <i data-feather="users"></i>
                         <span> Slider Setup </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarAuth">
+                    <div class="collapse" id="sliderAuth">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('get.slider') }}" class="tp-link">Get Slider</a>
