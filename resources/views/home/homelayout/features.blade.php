@@ -1,6 +1,5 @@
 @php
     $title = App\Models\Title::first();
-
 @endphp
 
 <div class="lonyo-content-shape1">
