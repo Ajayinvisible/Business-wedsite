@@ -45,26 +45,41 @@
             let field = element.id === 'slider-title' ? 'title' : 'description';
             let newValue = element.innerText.trim();
 
-            fatch(`/edit-slider/${sliderId}`, {
-                method: 'POST',
-                headers: {
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute(
-                        'content'),
-                    "Content-Type": 'application/json'
-                }
-                body: JSON.stringify({
+            fetch(`/edit-slider/${sliderId}`, {
+                    method: 'POST',
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({
                         [field]: newValue
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            console.log(`${field} updated successfully`);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log(`${field} updated successfully`);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
-    })
+        //auto save on enter
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveChanges(e.target);
+            }
+        });
+
+        //auto save on blur
+        titleElement.addEventListener('blur', function() {
+            saveChanges(titleElement);
+        })
+
+        descriptionElement.addEventListener('blur', function() {
+            saveChanges(descriptionElement);
+        });
+    });
 </script>
