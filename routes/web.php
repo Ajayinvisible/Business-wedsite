@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\ClarifiesController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SliderController;
@@ -62,5 +63,11 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}/feature', 'EditFeature')->name('edit.feature');
         Route::put('update/{id}/feature', 'UpdateFeature')->name('update.feature');
         Route::get('delete/{id}/feature', 'DeleteFeature')->name('delete.feature');
+    });
+
+    Route::controller(ClarifiesController::class)->group(function () {
+        Route::get('get/clarifies', 'GetClarifies')->name('get.clarifies');
+        Route::put('update/{id}/clarifies', 'UpdateClarifies')->name('update.clarifies');
+        Route::post('edit-clarifies/{id}', 'EditClarifies');
     });
 });

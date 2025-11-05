@@ -90,6 +90,21 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#clarifiesAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Clarifies Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="clarifiesAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('get.clarifies') }}" class="tp-link">Get Clarifies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>

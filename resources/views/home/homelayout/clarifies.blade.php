@@ -1,17 +1,21 @@
+@php
+    $clarifi = App\Models\Clarifie::firstOrFail();
+@endphp
 <section class="lonyo-section-padding6">
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
                 <div class="lonyo-content-thumb" data-aos="fade-up" data-aos-duration="700">
-                    <img src="{{ asset('frontend/assets/images/v1/content-thumb.png') }}" alt="">
+                    <img src="{{ asset($clarifi->image) }}" alt="">
                 </div>
             </div>
             <div class="col-lg-7 d-flex align-items-center">
                 <div class="lonyo-default-content pl-50" data-aos="fade-up" data-aos-duration="700">
-                    <h2>It clarifies all strategic financial decisions</h2>
-                    <p class="data">With this tool, you can say goodbye to overspending, stay on track with your
-                        savings goals, and say goodbye to financial worries. Get ready for a clearer view of your
-                        finances like never before!</p>
+                    <h2 id="clarifi-title" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+                        data-id="{{ $clarifi->id }}">{{ $clarifi->title }}</h2>
+                    <p id="clarifi-description" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+                        data-id="{{ $clarifi->id }}" class="data">{{ $clarifi->description }}</p>
+
                     <div class="lonyo-faq-wrap1 mt-50">
                         <div class="lonyo-faq-item open" data-aos="fade-up" data-aos-duration="500">
                             <div class="lonyo-faq-header">
@@ -64,3 +68,56 @@
         </div>
     </div>
 </section>
+
+
+{{-- csrf token --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElement = document.getElementById('clarifi-title');
+        const descriptionElement = document.getElementById('clarifi-description');
+
+        function saveChanges(element) {
+            let clarifiId = element.dataset.id;
+            let field = element.id === 'clarifi-title' ? 'title' : 'description';
+            let newValue = element.innerText.trim();
+
+            fetch(`/edit-clarifies/${clarifiId}`, {
+                    method: 'POST',
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({
+                        [field]: newValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log(`${field} updated successfully`);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        //auto save on enter
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveChanges(e.target);
+            }
+        });
+
+        //auto save on blur
+        titleElement.addEventListener('blur', function() {
+            saveChanges(titleElement);
+        })
+
+        descriptionElement.addEventListener('blur', function() {
+            saveChanges(descriptionElement);
+        });
+    });
+</script>
