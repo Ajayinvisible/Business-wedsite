@@ -9,6 +9,9 @@
 
         <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!--- End favicon-->
 
         <link
@@ -25,7 +28,6 @@
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/aos.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/niceselect.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}">
-
 
 
         <!-- Code Editor  -->

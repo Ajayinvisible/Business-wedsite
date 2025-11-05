@@ -74,16 +74,16 @@
                 <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
                         <i data-feather="alert-octagon"></i>
-                        <span> Error Pages </span>
+                        <span> Feature Setup </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarError">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="error-404.html" class="tp-link">Error 404</a>
+                                <a href="{{ route('all.feature') }}" class="tp-link">All Feature</a>
                             </li>
                             <li>
-                                <a href="error-500.html" class="tp-link">Error 500</a>
+                                <a href="{{ route('add.feature') }}" class="tp-link">Add Feature</a>
                             </li>
                             
                         </ul>
