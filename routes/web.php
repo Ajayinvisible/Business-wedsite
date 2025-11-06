@@ -95,5 +95,7 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}/connect', 'EditConnect')->name('edit.connect');
         Route::put('update/{id}/connect', 'UpdateConnect')->name('update.connect');
         Route::get('delete/{id}/connect', 'DeleteConnect')->name('delete.connect');
+
+        Route::post('edit-connect/{id}', 'EditConnectInline');
     });
 });
