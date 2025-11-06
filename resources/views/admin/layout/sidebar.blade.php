@@ -153,6 +153,24 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#faqAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Faq's Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="faqAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.faqs') }}" class="tp-link">All Faq's</a>
+                            </li>
+                             <li>
+                                <a href="{{ route('add.faqs') }}" class="tp-link">Add Faq's</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>

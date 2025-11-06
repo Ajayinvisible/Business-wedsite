@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ClarifiesController;
 use App\Http\Controllers\Backend\ConnectController;
+use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\FinancialController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
@@ -97,5 +98,15 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/{id}/connect', 'DeleteConnect')->name('delete.connect');
 
         Route::post('edit-connect/{id}', 'EditConnectInline');
+    });
+
+
+    Route::controller(FaqController::class)->group(function () {
+        Route::get('all/faqs', 'AllFaqs')->name('all.faqs');
+        Route::get('add/faqs', 'AddFaqs')->name('add.faqs');
+        Route::post('store/faqs', 'StoreFaqs')->name('store.faqs');
+        Route::get('edit/{id}/faqs', 'EditFaqs')->name('edit.faqs');
+        Route::put('update/{id}/faqs', 'UpdateFaqs')->name('update.faqs');
+        Route::get('delete/{id}/faqs', 'DeleteFaqs')->name('delete.faqs');
     });
 });
