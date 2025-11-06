@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ClarifiesController;
+use App\Http\Controllers\Backend\FinancialController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SliderController;
@@ -69,5 +70,11 @@ Route::middleware('auth')->group(function () {
         Route::get('get/clarifies', 'GetClarifies')->name('get.clarifies');
         Route::put('update/{id}/clarifies', 'UpdateClarifies')->name('update.clarifies');
         Route::post('edit-clarifies/{id}', 'EditClarifies');
+    });
+
+    Route::controller(FinancialController::class)->group(function () {
+        Route::get('get/financial', 'GetFinancial')->name('get.financial');
+        Route::put('update/{id}/financial', 'UpdateFinancial')->name('update.financial');
+        Route::post('edit-financial/{id}', 'EditFinancial');
     });
 });

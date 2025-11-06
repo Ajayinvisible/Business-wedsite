@@ -105,55 +105,28 @@
                     </div>
                 </li>
 
-                <li class="menu-title mt-2">General</li>
-
                 <li>
-                    <a href="#sidebarBaseui" data-bs-toggle="collapse">
-                        <i data-feather="package"></i>
-                        <span> Components </span>
+                    <a href="#financialAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Financial Setup </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarBaseui">
+                    <div class="collapse" id="financialAuth">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="ui-accordions.html" class="tp-link">Accordions</a>
-                            </li>
-                            <li>
-                                <a href="ui-alerts.html" class="tp-link">Alerts</a>
+                                <a href="{{ route('get.financial') }}" class="tp-link">Get Financial</a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
+                <li class="menu-title mt-2">General</li>
 
                 <li>
                     <a href="widgets.html" class="tp-link">
                         <i data-feather="aperture"></i>
                         <span> Widgets </span>
                     </a>
-                </li>
-
-                <li>
-                    <a href="#sidebarAdvancedUI" data-bs-toggle="collapse">
-                        <i data-feather="cpu"></i>
-                        <span> Extended UI </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarAdvancedUI">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="extended-carousel.html" class="tp-link">Carousel</a>
-                            </li>
-                            <li>
-                                <a href="extended-notifications.html" class="tp-link">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="extended-offcanvas.html" class="tp-link">Offcanvas</a>
-                            </li>
-                            <li>
-                                <a href="extended-range-slider.html" class="tp-link">Range Slider</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
             </ul>
