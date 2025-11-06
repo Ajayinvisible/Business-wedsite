@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ClarifiesController;
+use App\Http\Controllers\Backend\ConnectController;
 use App\Http\Controllers\Backend\FinancialController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
@@ -79,10 +80,20 @@ Route::middleware('auth')->group(function () {
         Route::post('edit-financial/{id}', 'EditFinancial');
     });
 
-    
+
     Route::controller(UsabilityController::class)->group(function () {
         Route::get('get/usability', 'GetUsability')->name('get.usability');
         Route::put('update/{id}/usability', 'UpdateUsability')->name('update.usability');
         Route::post('edit-usability/{id}', 'EditUsability');
+    });
+
+
+    Route::controller(ConnectController::class)->group(function () {
+        Route::get('all/connect', 'AllConnect')->name('all.connect');
+        Route::get('add/connect', 'AddConnect')->name('add.connect');
+        Route::post('store/connect', 'StoreConnect')->name('store.connect');
+        Route::get('edit/{id}/connect', 'EditConnect')->name('edit.connect');
+        Route::put('update/{id}/connect', 'UpdateConnect')->name('update.connect');
+        Route::get('delete/{id}/connect', 'DeleteConnect')->name('delete.connect');
     });
 });
