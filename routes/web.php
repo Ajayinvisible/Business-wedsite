@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\FinancialController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\UsabilityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -76,5 +77,12 @@ Route::middleware('auth')->group(function () {
         Route::get('get/financial', 'GetFinancial')->name('get.financial');
         Route::put('update/{id}/financial', 'UpdateFinancial')->name('update.financial');
         Route::post('edit-financial/{id}', 'EditFinancial');
+    });
+
+    
+    Route::controller(UsabilityController::class)->group(function () {
+        Route::get('get/usability', 'GetUsability')->name('get.usability');
+        Route::put('update/{id}/usability', 'UpdateUsability')->name('update.usability');
+        Route::post('edit-usability/{id}', 'EditUsability');
     });
 });

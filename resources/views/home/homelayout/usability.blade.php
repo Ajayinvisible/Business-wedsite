@@ -1,10 +1,14 @@
+@php
+    $usability = App\Models\Usability::firstOrFail();
+@endphp
+
 <div class="lonyo-section-padding bg-heading position-relative sectionn">
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
                 <div class="lonyo-video-thumb">
-                    <img src="{{ asset('frontend/assets/images/v1/video-thumb.png') }}" alt="">
-                    <a class="play-btn video-init" href="https://www.youtube.com/watch?v=fgZc7mAYIY8">
+                    <img src="{{ asset($usability->image) }}" alt="">
+                    <a class="play-btn video-init" href="{{ $usability->youtube_link }}">
                         <img src="{{ asset('frontend/assets/images/v1/play-icon.svg') }}" alt="">
                         <div class="waves wave-1"></div>
                         <div class="waves wave-2"></div>
@@ -14,11 +18,12 @@
             </div>
             <div class="col-lg-7 d-flex align-items-center">
                 <div class="lonyo-default-content lonyo-video-section pl-50" data-aos="fade-up" data-aos-duration="500">
-                    <h2>Its usability is simple and intuitive for users</h2>
-                    <p>It's a cloud-based accounting tool ideal for individuals & businesses to easily manage finances,
-                        invoices & payroll. Unlock the 3-step path to enhanced financial control. </p>
+                    <h2 id="usability-title" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+                        data-id="{{ $usability->id }}">{{ $usability->title }}</h2>
+                    <p id="usability-description" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+                        data-id="{{ $usability->id }}">{{ $usability->description }}</p>
                     <div class="mt-50" data-aos="fade-up" data-aos-duration="700">
-                        <a class="lonyo-default-btn video-btn" href="contact-us.html">Download the app</a>
+                        <a class="lonyo-default-btn video-btn" href="{{ $usability->link }}">Download the app</a>
                     </div>
                 </div>
             </div>
@@ -70,3 +75,56 @@
         </div>
     </div>
 </div>
+
+
+{{-- csrf token --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElement = document.getElementById('usability-title');
+        const descriptionElement = document.getElementById('usability-description');
+
+        function saveChanges(element) {
+            let usabilityId = element.dataset.id;
+            let field = element.id === 'usability-title' ? 'title' : 'description';
+            let newValue = element.innerText.trim();
+
+            fetch(`/edit-usability/${usabilityId}`, {
+                    method: 'POST',
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({
+                        [field]: newValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log(`${field} updated successfully`);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        //auto save on enter
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveChanges(e.target);
+            }
+        });
+
+        //auto save on blur
+        titleElement.addEventListener('blur', function() {
+            saveChanges(titleElement);
+        })
+
+        descriptionElement.addEventListener('blur', function() {
+            saveChanges(descriptionElement);
+        });
+    });
+</script>
