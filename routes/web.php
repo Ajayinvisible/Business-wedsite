@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Backend\AppController;
 use App\Http\Controllers\Backend\ClarifiesController;
 use App\Http\Controllers\Backend\ConnectController;
@@ -117,3 +118,5 @@ Route::middleware('auth')->group(function () {
         Route::post('upload-app-image/{id}', 'UploadAppImage');
     });
 });
+
+Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');

@@ -10,7 +10,7 @@
                     <img id="appImage" src="{{ asset($app->image) }}"
                         alt="{{ $app->title }}">
                     @if (auth()->check())
-                        <input type="file" id="uploadImage">
+                        <input type="file" id="uploadImage" class="d-none">
                     @endif
                 </div>
             </div>
