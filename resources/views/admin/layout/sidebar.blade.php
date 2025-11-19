@@ -171,6 +171,24 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#teamAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Team's Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="teamAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.team') }}" class="tp-link">All Team's</a>
+                            </li>
+                             <li>
+                                <a href="{{ route('add.team') }}" class="tp-link">Add Team</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>

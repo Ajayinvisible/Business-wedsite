@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\FinancialController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Backend\UsabilityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -116,6 +117,16 @@ Route::middleware('auth')->group(function () {
     Route::controller(AppController::class)->group(function () {
         Route::post('edit-app/{id}', 'EditAppInline');
         Route::post('upload-app-image/{id}', 'UploadAppImage');
+    });
+
+
+    Route::controller(TeamController::class)->group(function () {
+        Route::get('all/team', 'AllTeam')->name('all.team');
+        Route::get('add/team', 'AddTeam')->name('add.team');
+        Route::post('store/team', 'StoreTeam')->name('store.team');
+        Route::get('edit/{id}/team', 'EditTeam')->name('edit.team');
+        Route::put('update/{id}/team', 'UpdateTeam')->name('update.team');
+        Route::get('delete/{id}/team', 'DeleteTeam')->name('delete.team');
     });
 });
 
