@@ -44,7 +44,7 @@ class TeamController extends Controller
 
             $img = $manager->read($image);
             // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
-            $img->resize(60, 60)->toWebp(80)->save(public_path('upload/team/' . $name_gen));
+            $img->resize(306, 400)->toWebp(80)->save(public_path('upload/team/' . $name_gen));
             $save_url = 'upload/team/' . $name_gen;
 
             Team::create([
@@ -88,7 +88,7 @@ class TeamController extends Controller
 
             $img = $manager->read($image);
             // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
-            $img->resize(60, 60)->toWebp(80)->save(public_path('upload/team/' . $name_gen));
+            $img->resize(306, 400)->toWebp(80)->save(public_path('upload/team/' . $name_gen));
             $save_url = 'upload/team/' . $name_gen;
 
             Team::find($tem_id)->update([
