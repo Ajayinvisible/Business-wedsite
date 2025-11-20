@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Backend\AppController;
 use App\Http\Controllers\Backend\ClarifiesController;
@@ -128,6 +129,13 @@ Route::middleware('auth')->group(function () {
         Route::put('update/{id}/team', 'UpdateTeam')->name('update.team');
         Route::get('delete/{id}/team', 'DeleteTeam')->name('delete.team');
     });
+
+    Route::controller(AboutController::class)->group(function () {
+        Route::get('get/about', 'GetAbout')->name('get.about');
+        Route::put('update/{id}/about', 'UpdateAbout')->name('update.about');
+        Route::post('edit-about/{id}', 'EditAbout');
+    });
 });
 
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
+Route::get('/about-us', [FrontendController::class, 'AboutUs'])->name('about.us');

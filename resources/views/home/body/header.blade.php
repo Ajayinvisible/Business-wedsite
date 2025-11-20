@@ -16,7 +16,7 @@
                                 <a href="{{ url('/') }}">Home</a>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="#">About us</a>
+                                <a href="{{ route('about.us') }}">About us</a>
                                 <ul class="sub-menu">
                                     <li><a href="about-us.html">Company Profile</a></li>
                                     <li><a href="{{ route('our.team') }}">Team</a></li>
