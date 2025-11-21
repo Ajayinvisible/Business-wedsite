@@ -142,7 +142,7 @@ Route::middleware('auth')->group(function () {
         Route::get('add/blog/category', 'AddBlogCategory')->name('add.blog.category');
         Route::post('store/blog/category', 'StoreBlogCategory')->name('store.blog.category');
         Route::get('edit/{id}/blog/category', 'EditBlogCategory')->name('edit.blog.category');
-        Route::put('update/{id}/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+        Route::put('update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
         Route::get('delete/{id}/blog/category', 'DeleteBlogCategory')->name('delete.blog.category');
     });
 });
