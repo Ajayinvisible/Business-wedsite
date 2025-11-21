@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Backend\AppController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\ClarifiesController;
 use App\Http\Controllers\Backend\ConnectController;
 use App\Http\Controllers\Backend\FaqController;
@@ -134,6 +135,15 @@ Route::middleware('auth')->group(function () {
         Route::get('get/about', 'GetAbout')->name('get.about');
         Route::put('update/{id}/about', 'UpdateAbout')->name('update.about');
         Route::post('edit-about/{id}', 'EditAbout');
+    });
+
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('all/blog/category', 'AllBlogCategory')->name('all.blog.category');
+        Route::get('add/blog/category', 'AddBlogCategory')->name('add.blog.category');
+        Route::post('store/blog/category', 'StoreBlogCategory')->name('store.blog.category');
+        Route::get('edit/{id}/blog/category', 'EditBlogCategory')->name('edit.blog.category');
+        Route::put('update/{id}/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+        Route::get('delete/{id}/blog/category', 'DeleteBlogCategory')->name('delete.blog.category');
     });
 });
 

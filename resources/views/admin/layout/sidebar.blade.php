@@ -85,7 +85,7 @@
                             <li>
                                 <a href="{{ route('add.feature') }}" class="tp-link">Add Feature</a>
                             </li>
-                            
+
                         </ul>
                     </div>
                 </li>
@@ -146,7 +146,7 @@
                             <li>
                                 <a href="{{ route('all.connect') }}" class="tp-link">All Connect</a>
                             </li>
-                             <li>
+                            <li>
                                 <a href="{{ route('add.connect') }}" class="tp-link">Add Connect</a>
                             </li>
                         </ul>
@@ -164,7 +164,7 @@
                             <li>
                                 <a href="{{ route('all.faqs') }}" class="tp-link">All Faq's</a>
                             </li>
-                             <li>
+                            <li>
                                 <a href="{{ route('add.faqs') }}" class="tp-link">Add Faq's</a>
                             </li>
                         </ul>
@@ -182,7 +182,7 @@
                             <li>
                                 <a href="{{ route('all.team') }}" class="tp-link">All Team's</a>
                             </li>
-                             <li>
+                            <li>
                                 <a href="{{ route('add.team') }}" class="tp-link">Add Team</a>
                             </li>
                         </ul>
@@ -199,6 +199,24 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('get.about') }}" class="tp-link">Get About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#categoryAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Blog Category Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="categoryAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.blog.category') }}" class="tp-link">All Blog Category</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.blog.category') }}" class="tp-link">Add Blog Category</a>
                             </li>
                         </ul>
                     </div>
