@@ -48,7 +48,7 @@
                                     <div class="form-group mb-3 row">
                                         <label class="form-label">Description</label>
                                         <div class="col-lg-12 col-xl-12">
-                                            <textarea name="description" id="description" class="form-control d-none" cols="20" rows="5"></textarea>
+                                            <textarea name="description" id="description" class="d-none"></textarea>
                                             <div id="quill-editor" style="height: 250px;">
                                                 {!! $about->description !!}
                                             </div>
@@ -71,7 +71,6 @@
                                         </div>
                                     </div>
 
-
                                     <button type="submit" class="btn btn-primary">Save
                                         Changes</button>
                                 </div><!--end card-body-->
@@ -84,10 +83,9 @@
         <!-- container-fluid -->
     </div> <!-- content -->
     <script>
-        document.querySelectorAll('form').onsubmit = function() {
-            var description = document.querySelector('#description');
-            description.value = quill.root.innerHTML;
-        }
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('description').value = quill.root.innerHTML;
+        });
     </script>
     <script type="text/javascript">
         $(document).ready(function() {

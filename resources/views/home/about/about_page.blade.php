@@ -42,7 +42,7 @@
                          <h2 id="about-title" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
                              data-id="{{ $about->id }}">{{ $about->title }}</h2>
                          <p id="about-description" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
-                             data-id="{{ $about->id }}">{{ $about->description }}</p>
+                             data-id="{{ $about->id }}">{!! $about->description !!}</p>
                      </div>
                  </div>
              </div>

@@ -23,8 +23,8 @@ class AboutController extends Controller
     public function UpdateAbout(Request $request, $id)
     {
         // Logic to update a review
-        $rev_id = $request->id;
-        $about = About::findOrFail($rev_id);
+        $ab_id = $request->id;
+        $about = About::findOrFail($ab_id);
         // image upload and resizing logic
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -47,7 +47,7 @@ class AboutController extends Controller
                 unlink(public_path($about->image));
             }
 
-            About::find($rev_id)->update([
+            About::find($ab_id)->update([
                 'title' => $request->title,
                 'description' => $request->description,
                 'image' => $save_url,
@@ -59,7 +59,7 @@ class AboutController extends Controller
             );
             return redirect()->back()->with($notification);
         } else {
-            About::find($rev_id)->update([
+            About::find($ab_id)->update([
                 'title' => $request->title,
                 'description' => $request->description,
             ]);
