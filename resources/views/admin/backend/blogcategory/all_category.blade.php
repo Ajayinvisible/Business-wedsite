@@ -34,8 +34,8 @@
                                     @foreach ($categories as $key => $category)
                                         <tr>
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
+                                            <td>{{ $category->category_name }}</td>
+                                            <td>{{ $category->category_slug }}</td>
                                             <td>
                                                 <a href="{{ route('edit.blog.category', $category->id) }}"
                                                     class="btn btn-success rounded">
@@ -67,12 +67,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
+                    <form action="{{ route('store.blog.category') }}" method="POST">
+                        @csrf
+                        <div class="form-group col-md-12">
+                            <label for="name" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" id="name" name="category_name"
+                                placeholder="Enter Blog Category Name">
+                        </div>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
