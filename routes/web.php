@@ -152,7 +152,7 @@ Route::middleware('auth')->group(function () {
         Route::get('add/blog', 'AddBlog')->name('add.blog');
         Route::post('store/blog', 'StoreBlog')->name('store.blog');
         Route::get('edit/{id}/blog', 'EditBlog')->name('edit.blog');
-        Route::put('update/blog', 'UpdateBlog')->name('update.blog');
+        Route::put('update/{id}/blog', 'UpdateBlog')->name('update.blog');
         Route::get('delete/{id}/blog', 'DeleteBlog')->name('delete.blog');
     });
 });

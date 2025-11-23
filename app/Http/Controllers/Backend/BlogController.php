@@ -34,7 +34,7 @@ class BlogController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Review Added Successfully',
+            'message' => 'Rev Added Successfully',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -124,11 +124,72 @@ class BlogController extends Controller
             ]);
         }
 
-        // Redirect to the all reviews page with a success message
+        // Redirect to the all blogs page with a success message
         $notification = array(
             'message' => 'Blog Post Added Successfully',
             'alert-type' => 'success'
         );
         return redirect()->route('all.blog')->with($notification);
+    }
+
+    public function EditBlog($id)
+    {
+        $blog = BogPost::findOrFail($id);
+        $categories = BlogCategory::latest()->get();
+        return view('admin.backend.blog.edit_blog', [
+            'blog' => $blog,
+            'categories' => $categories
+        ]);
+    }
+
+    public function UpdateBlog(Request $request, $id)
+    {
+        // Logic to update a blog
+        $blog_id = $request->id;
+        // image upload and resizing logic
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()) . '.' . "webp";
+
+            $uploadPath = public_path('upload/blog');
+
+            // Check if the folder exists, if not create it
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true); // 0755 permission, recursive
+            }
+
+            $img = $manager->read($image);
+            // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
+            $img->resize(746, 500)->toWebp(80)->save(public_path('upload/blog/' . $name_gen));
+            $save_url = 'upload/blog/' . $name_gen;
+
+            BogPost::find($blog_id)->update([
+                'blog_cat_id' => $request->blog_cat_id,
+                'post_title' => $request->post_title,
+                'post_slug' => Str::slug($request->post_title, '-'),
+                'post_description' => $request->post_description,
+                'image' => $save_url,
+            ]);
+            // Redirect to the all blogs page with a success message
+            $notification = array(
+                'message' => 'Blog Post Updated With Image Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('all.blog')->with($notification);
+        } else {
+            BogPost::find($blog_id)->update([
+                'blog_cat_id' => $request->blog_cat_id,
+                'post_title' => $request->post_title,
+                'post_slug' => Str::slug($request->post_title, '-'),
+                'post_description' => $request->post_description,
+            ]);
+            // Redirect to the all blogs page with a success message
+            $notification = array(
+                'message' => 'Blog Post Updated Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('all.blog')->with($notification);
+        }
     }
 }

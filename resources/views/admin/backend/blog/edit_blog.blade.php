@@ -26,8 +26,9 @@
 
                         <div class="card-body">
 
-                            <form action="{{ route('store.blog') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('update.blog', $blog) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -36,9 +37,9 @@
                                                 <div class="col-lg-6 col-xl-12">
                                                     <select name="blog_cat_id" class="form-select"
                                                         aria-label="Default select example">
-                                                        <option selected>Select Blog Category</option>
                                                         @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}">
+                                                            <option value="{{ $category->id }}"
+                                                                {{ $category->id == $blog->blog_cat_id ? 'selected' : '' }}>
                                                                 {{ $category->category_name }}</option>
                                                         @endforeach
                                                     </select>
@@ -49,7 +50,8 @@
                                             <div class="form-group mb-3 row">
                                                 <label class="form-label">Title</label>
                                                 <div class="col-lg-6 col-xl-12">
-                                                    <input class="form-control" type="text" name="post_title" />
+                                                    <input class="form-control" type="text" name="post_title"
+                                                        value="{{ $blog->post_title }}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +62,7 @@
                                         <div class="col-lg-12 col-xl-12">
                                             <textarea name="post_description" id="description" class="d-none"></textarea>
                                             <div id="quill-editor" style="height: 250px;">
-
+                                                {!! $blog->post_description !!}
                                             </div>
                                         </div>
                                     </div>
@@ -74,8 +76,9 @@
 
                                     <div class="form-group mb-3 row">
                                         <div class="col-lg-12 col-xl-12">
-                                            <img id="showImage" src="{{ url('upload/no_image.jpg') }}"
-                                                class="avatar-xxl img-thumbnail float-start" alt="image">
+                                            <img id="showImage"
+                                                src="{{ !empty($blog->image) ? url($blog->image) : url('upload/no_image.jpg') }}"
+                                                class="img-thumbnail avatar-xxl float-start" alt="image profile">
                                         </div>
                                     </div>
 
