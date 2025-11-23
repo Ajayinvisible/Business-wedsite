@@ -7,6 +7,10 @@ use App\Models\BlogCategory;
 use App\Models\BogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+// image intervention library for image manipulation
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class BlogController extends Controller
 {
@@ -81,5 +85,49 @@ class BlogController extends Controller
         return view('admin.backend.blog.all_blog', [
             'blogs' => $blogs
         ]);
+    }
+
+    public function AddBlog()
+    {
+        $categories = BlogCategory::latest()->get();
+        return view('admin.backend.blog.add_blog', [
+            'categories' => $categories
+        ]);
+    }
+
+    public function StoreReview(Request $request)
+    {
+        // image upload and resizing logic
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()) . '.' . "webp";
+
+            $uploadPath = public_path('upload/review');
+
+            // Check if the folder exists, if not create it
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true); // 0755 permission, recursive
+            }
+
+            $img = $manager->read($image);
+            // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
+            $img->resize(60, 60)->toWebp(80)->save(public_path('upload/review/' . $name_gen));
+            $save_url = 'upload/review/' . $name_gen;
+
+            BogPost::create([
+                'name' => $request->name,
+                'position' => $request->position,
+                'message' => $request->message,
+                'image' => $save_url,
+            ]);
+        }
+
+        // Redirect to the all reviews page with a success message
+        $notification = array(
+            'message' => 'Review Added Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.review')->with($notification);
     }
 }
