@@ -192,4 +192,19 @@ class BlogController extends Controller
             return redirect()->route('all.blog')->with($notification);
         }
     }
+
+    public function DeleteBlog($id)
+    {
+        $item = BogPost::findOrFail($id);
+        $imagePath = public_path($item->image);
+        unlink($imagePath); // Delete the image file from the server
+
+        BogPost::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Blog Post Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.blog')->with($notification);
+    }
 }
