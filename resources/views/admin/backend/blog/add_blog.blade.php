@@ -34,9 +34,9 @@
                                             <div class="form-group mb-3 row">
                                                 <label class="form-label">Blog Category</label>
                                                 <div class="col-lg-6 col-xl-12">
-                                                    <select name="blog_category_id" class="form-select"
+                                                    <select name="blog_cat_id" class="form-select"
                                                         aria-label="Default select example">
-                                                        <option selected="">Select Blog Category</option>
+                                                        <option selected>Select Blog Category</option>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">
                                                                 {{ $category->category_name }}</option>
@@ -49,7 +49,7 @@
                                             <div class="form-group mb-3 row">
                                                 <label class="form-label">Title</label>
                                                 <div class="col-lg-6 col-xl-12">
-                                                    <input class="form-control" type="text" name="title" />
+                                                    <input class="form-control" type="text" name="post_title" />
                                                 </div>
                                             </div>
                                         </div>
@@ -58,7 +58,7 @@
                                     <div class="form-group mb-3 row">
                                         <label class="form-label">Description</label>
                                         <div class="col-lg-12 col-xl-12">
-                                            <textarea name="description" id="description" class="d-none"></textarea>
+                                            <textarea name="post_description" id="description" class="d-none"></textarea>
                                             <div id="quill-editor" style="height: 250px;">
 
                                             </div>
@@ -66,7 +66,7 @@
                                     </div>
 
                                     <div class="form-group mb-3 row">
-                                        <label class="form-label">About Photo</label>
+                                        <label class="form-label">Image</label>
                                         <div class="col-lg-12 col-xl-12">
                                             <input name="image" class="form-control" type="file" id="image">
                                         </div>

@@ -81,7 +81,7 @@ class BlogController extends Controller
 
     public function AllBlog()
     {
-        $blogs = BogPost::latest()->get();
+        $blogs = BogPost::latest()->with('category')->get();
         return view('admin.backend.blog.all_blog', [
             'blogs' => $blogs
         ]);
@@ -95,7 +95,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function StoreReview(Request $request)
+    public function StoreBlog(Request $request)
     {
         // image upload and resizing logic
         if ($request->hasFile('image')) {
@@ -103,7 +103,7 @@ class BlogController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()) . '.' . "webp";
 
-            $uploadPath = public_path('upload/review');
+            $uploadPath = public_path('upload/blog');
 
             // Check if the folder exists, if not create it
             if (!File::exists($uploadPath)) {
@@ -112,22 +112,23 @@ class BlogController extends Controller
 
             $img = $manager->read($image);
             // Resize the image to 60x60 pixels and save it as webp format with 80% quality 
-            $img->resize(60, 60)->toWebp(80)->save(public_path('upload/review/' . $name_gen));
-            $save_url = 'upload/review/' . $name_gen;
+            $img->resize(746, 500)->toWebp(80)->save(public_path('upload/blog/' . $name_gen));
+            $save_url = 'upload/blog/' . $name_gen;
 
             BogPost::create([
-                'name' => $request->name,
-                'position' => $request->position,
-                'message' => $request->message,
+                'blog_cat_id' => $request->blog_cat_id,
+                'post_title' => $request->post_title,
+                'post_slug' => Str::slug($request->post_title, '-'),
+                'post_description' => $request->post_description,
                 'image' => $save_url,
             ]);
         }
 
         // Redirect to the all reviews page with a success message
         $notification = array(
-            'message' => 'Review Added Successfully',
+            'message' => 'Blog Post Added Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('all.review')->with($notification);
+        return redirect()->route('all.blog')->with($notification);
     }
 }

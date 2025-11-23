@@ -36,13 +36,13 @@
                                     @foreach ($blogs as $key => $blog)
                                         <tr>
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $blog->blog_cat_id }}</td>
-                                            <td>{{ $blog->title }}</td>
+                                            <td>{{ $blog->category->category_name }}</td>
+                                            <td>{{ $blog->post_title }}</td>
                                             <td>
                                                 <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}"
-                                                    class="rounded-circle" style="width: 50px; height: 50px;">
+                                                     style="width: 80px; height: 40px;">
                                             </td>
-                                            <td>{!! Str::limit($blog->description, 50, '...') !!}</td>
+                                            <td>{!! Str::limit($blog->post_description, 50, '...') !!}</td>
                                             <td>
                                                 <a href="{{ route('edit.blog', $blog->id) }}"
                                                     class="btn btn-success rounded">

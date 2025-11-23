@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BogPost extends Model
 {
@@ -13,4 +14,9 @@ class BogPost extends Model
         'post_description',
         'image',
     ];
+
+    public function category() :BelongsTo
+    {
+        return $this->belongsTo(BlogCategory::class, 'blog_cat_id');
+    }
 }
