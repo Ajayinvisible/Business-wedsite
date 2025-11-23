@@ -222,6 +222,24 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#blogAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Blog Post Setup </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="blogAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.blog') }}" class="tp-link">All Blog Posts</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.blog') }}" class="tp-link">Add Blog Post</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>

@@ -145,6 +145,16 @@ Route::middleware('auth')->group(function () {
         Route::put('update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
         Route::get('delete/{id}/blog/category', 'DeleteBlogCategory')->name('delete.blog.category');
     });
+
+
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('all/blog', 'AllBlog')->name('all.blog');
+        Route::get('add/blog', 'AddBlog')->name('add.blog');
+        Route::post('store/blog', 'StoreBlog')->name('store.blog');
+        Route::get('edit/{id}/blog', 'EditBlog')->name('edit.blog');
+        Route::put('update/blog', 'UpdateBlog')->name('update.blog');
+        Route::get('delete/{id}/blog', 'DeleteBlog')->name('delete.blog');
+    });
 });
 
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');

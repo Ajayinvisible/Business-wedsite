@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
+use App\Models\BogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -70,5 +71,15 @@ class BlogController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
+    }
+
+    // Blog Methods Start Here
+
+    public function AllBlog()
+    {
+        $blogs = BogPost::latest()->get();
+        return view('admin.backend.blog.all_blog', [
+            'blogs' => $blogs
+        ]);
     }
 }
