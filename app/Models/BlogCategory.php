@@ -14,6 +14,6 @@ class BlogCategory extends Model
 
     public function posts() :HasMany
     {
-        return $this->hasMany(BogPost::class);
+        return $this->hasMany(BlogPost::class, 'blog_cat_id');
     }
 }
