@@ -22,9 +22,27 @@ class FrontendController extends Controller
     {
         $blogCategories = BlogCategory::withCount('posts')->latest()->get();
         $posts = BlogPost::latest()->limit(5)->get();
+        $recentPost = BlogPost::latest()->paginate(3);
         return view('home.blog.list_blog',[
             'blogCategories' => $blogCategories,
             'posts' => $posts,
+            'recentPost' => $recentPost,
+        ]);
+    }
+
+    public function BlogDetails($slug)
+    {
+        $blogCategories = BlogCategory::withCount('posts')->latest()->get();
+        $post = BlogPost::where('post_slug', $slug)->firstOrFail();
+        $relatedPosts = BlogPost::where('blog_cat_id', $post->blog_cat_id)
+            ->where('id', '!=', $post->id)
+            ->latest()
+            ->limit(3)
+            ->get();
+        return view('home.blog.blog_details', [
+            'blogCategories' => $blogCategories,
+            'post' => $post,
+            'relatedPosts' => $relatedPosts,
         ]);
     }
 }
