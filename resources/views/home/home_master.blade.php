@@ -20,6 +20,9 @@
 
         <!-- End google font  -->
 
+        <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.css') }}">
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.css') }}">
@@ -118,6 +121,7 @@
         <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyArZVfNvjnLNwJZlLJKuOiWHZ6vtQzzb1Y"></script>
         <script src="{{ asset('frontend/assets/js/slick.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
         <script src="{{ asset('frontend/assets/js/app.js') }}"></script>
 

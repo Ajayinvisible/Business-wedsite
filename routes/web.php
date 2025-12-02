@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AppController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\ClarifiesController;
 use App\Http\Controllers\Backend\ConnectController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\FinancialController;
 use App\Http\Controllers\Backend\HomeController;
@@ -155,6 +156,12 @@ Route::middleware('auth')->group(function () {
         Route::put('update/{id}/blog', 'UpdateBlog')->name('update.blog');
         Route::get('delete/{id}/blog', 'DeleteBlog')->name('delete.blog');
     });
+
+    Route::controller(ContactController::class)->group(function () {
+        Route::get('contact/all/message', 'ContactMessage')->name('all.contact.message');
+        Route::get('contact/{id}/show', 'ShowMessage')->name('show.message');
+        Route::get('contact/{id}/message', 'DeleteMessage')->name('delete.message');
+    });
 });
 
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
@@ -163,3 +170,4 @@ Route::get('/blog', [FrontendController::class, 'BlogPage'])->name('blog.page');
 Route::get('/blog/details/{slug}', [FrontendController::class, 'BlogDetails']);
 Route::get('/blog/category/{slug}', [FrontendController::class, 'blogCategoryPage'])->name('blog.category');
 Route::get('/contact-us', [FrontendController::class, 'ContactUs'])->name('contact.us');
+Route::post('/contact/message',[FrontendController::class, 'ContactMessage'])->name('contact.message');

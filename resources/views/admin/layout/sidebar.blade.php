@@ -240,6 +240,22 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#contactAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> All Contact </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="contactAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.contact.message') }}" class="tp-link">All Contact Message</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
                 <li class="menu-title mt-2">General</li>
 
                 <li>
