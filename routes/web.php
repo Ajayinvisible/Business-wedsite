@@ -162,3 +162,4 @@ Route::get('/about-us', [FrontendController::class, 'AboutUs'])->name('about.us'
 Route::get('/blog', [FrontendController::class, 'BlogPage'])->name('blog.page');
 Route::get('/blog/details/{slug}', [FrontendController::class, 'BlogDetails']);
 Route::get('/blog/category/{slug}', [FrontendController::class, 'blogCategoryPage'])->name('blog.category');
+Route::get('/contact-us', [FrontendController::class, 'ContactUs'])->name('contact.us');

@@ -1,7 +1,7 @@
 @php
     $title = App\Models\Title::first();
 @endphp
-<div class="lonyo-section-padding4">
+<div class="lonyo-section-padding10">
     <div class="container">
         <div class="lonyo-section-title center">
             <h2 id="answer-title" contenteditable="{{ auth()->check() ? 'true' : 'false' }}" data-id="{{ $title->id }}">

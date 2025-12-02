@@ -59,4 +59,9 @@ class FrontendController extends Controller
             'recentPost' => $recentPost,
         ]);
     }
+
+    public function ContactUs()
+    {
+        return view('home.contact.contact_page');
+    }
 }
