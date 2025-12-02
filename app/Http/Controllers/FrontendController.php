@@ -45,4 +45,18 @@ class FrontendController extends Controller
             'relatedPosts' => $relatedPosts,
         ]);
     }
+
+    public function blogCategoryPage($slug)
+    {
+        $blogCategories = BlogCategory::withCount('posts')->latest()->get();
+        $category = BlogCategory::where('category_slug', $slug)->firstOrFail();
+        $posts = BlogPost::where('blog_cat_id', $category->id)->latest()->paginate(5);
+        $recentPost = BlogPost::latest()->paginate(3);
+        return view('home.blog.category_blog', [
+            'blogCategories' => $blogCategories,
+            'category' => $category,
+            'posts' => $posts,
+            'recentPost' => $recentPost,
+        ]);
+    }
 }

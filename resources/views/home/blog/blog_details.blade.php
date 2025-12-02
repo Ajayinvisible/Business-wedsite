@@ -15,7 +15,8 @@
                                  <li><img src="{{ asset('frontend/assets/images/blog/right-arrow.svg') }}" alt="right-arrow">
                                  </li>
                                  <li><a href="{{ route('blog.page') }}">Blogs</a></li>
-                                 <li><img src="{{ asset('frontend/assets/images/blog/right-arrow.svg') }}" alt="right-arrow">
+                                 <li><img src="{{ asset('frontend/assets/images/blog/right-arrow.svg') }}"
+                                         alt="right-arrow">
                                  </li>
                                  <li aria-current="page">{{ $post->post_title }}</li>
                              </ul>
@@ -133,7 +134,7 @@
                              <div class="lonyo-blog-categorie">
                                  <ul>
                                      @foreach ($blogCategories as $bCategory)
-                                         <li><a href="single-blog.html">{{ $bCategory->category_name }}
+                                         <li><a href="{{ url('blog/category/' . $bCategory->category_slug) }}">{{ $bCategory->category_name }}
                                                  <span>({{ $bCategory->posts_count }})</span></a></li>
                                      @endforeach
                                  </ul>
@@ -145,7 +146,7 @@
                                  <a class="lonyo-blog-recent-post-item"
                                      href="{{ url('blog/details/' . $rPost->post_slug) }}">
                                      <div class="lonyo-blog-recent-post-thumb">
-                                         <img src="{{ $rPost->image }}" alt="{{ $rPost->post_title }}"
+                                         <img src="{{ asset($rPost->image) }}" alt="{{ $rPost->post_title }}"
                                              style="width: 80px; height: 80px;">
                                      </div>
                                      <div class="lonyo-blog-recent-post-data">
