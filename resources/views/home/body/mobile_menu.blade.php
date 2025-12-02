@@ -13,13 +13,13 @@
          <div class="lonyo-mobile-menu">
              <ul>
                  <li>
-                     <a href="#">Home</a>
+                     <a href="{{ url('/') }}">Home</a>
                  </li>
                  <li class="menu-item-has-children">
-                     <a href="#">About us</a>
+                     <a href="{{ route('about.us') }}">About us</a>
                      <ul class="sub-menu">
                          <li><a href="about-us.html">Company Profile</a></li>
-                         <li><a href="pricing.html">Team</a></li>
+                         <li><a href="{{ route('our.team') }}">Team</a></li>
                      </ul>
                  </li>
                  <li>
@@ -29,7 +29,7 @@
                      <a href="#">Portfolio</a>
                  </li>
                  <li>
-                     <a href="#">Blog</a>
+                     <a href="{{ route('blog.page') }}">Blog</a>
                  </li>
                  <li>
                      <a href="contact-us.html">Contact</a>

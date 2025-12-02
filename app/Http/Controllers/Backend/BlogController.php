@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
-use App\Models\BogPost;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -81,7 +81,7 @@ class BlogController extends Controller
 
     public function AllBlog()
     {
-        $blogs = BogPost::latest()->with('category')->get();
+        $blogs = BlogPost::latest()->with('category')->get();
         return view('admin.backend.blog.all_blog', [
             'blogs' => $blogs
         ]);
@@ -115,7 +115,7 @@ class BlogController extends Controller
             $img->resize(746, 500)->toWebp(80)->save(public_path('upload/blog/' . $name_gen));
             $save_url = 'upload/blog/' . $name_gen;
 
-            BogPost::create([
+            BlogPost::create([
                 'blog_cat_id' => $request->blog_cat_id,
                 'post_title' => $request->post_title,
                 'post_slug' => Str::slug($request->post_title, '-'),
@@ -134,7 +134,7 @@ class BlogController extends Controller
 
     public function EditBlog($id)
     {
-        $blog = BogPost::findOrFail($id);
+        $blog = BlogPost::findOrFail($id);
         $categories = BlogCategory::latest()->get();
         return view('admin.backend.blog.edit_blog', [
             'blog' => $blog,
@@ -164,7 +164,7 @@ class BlogController extends Controller
             $img->resize(746, 500)->toWebp(80)->save(public_path('upload/blog/' . $name_gen));
             $save_url = 'upload/blog/' . $name_gen;
 
-            BogPost::find($blog_id)->update([
+            BlogPost::find($blog_id)->update([
                 'blog_cat_id' => $request->blog_cat_id,
                 'post_title' => $request->post_title,
                 'post_slug' => Str::slug($request->post_title, '-'),
@@ -178,7 +178,7 @@ class BlogController extends Controller
             );
             return redirect()->route('all.blog')->with($notification);
         } else {
-            BogPost::find($blog_id)->update([
+            BlogPost::find($blog_id)->update([
                 'blog_cat_id' => $request->blog_cat_id,
                 'post_title' => $request->post_title,
                 'post_slug' => Str::slug($request->post_title, '-'),
@@ -195,11 +195,11 @@ class BlogController extends Controller
 
     public function DeleteBlog($id)
     {
-        $item = BogPost::findOrFail($id);
+        $item = BlogPost::findOrFail($id);
         $imagePath = public_path($item->image);
         unlink($imagePath); // Delete the image file from the server
 
-        BogPost::findOrFail($id)->delete();
+        BlogPost::findOrFail($id)->delete();
 
         $notification = array(
             'message' => 'Blog Post Deleted Successfully',

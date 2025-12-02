@@ -6,15 +6,18 @@
          <div class="container">
 
              <div class="breadcrumb-content">
-                 <h1 class="breadcrumb-title pb-0">Blog Details</h1>
+                 <h1 class="breadcrumb-title pb-0">{{ $post->post_title }}</h1>
                  <div class="breadcrumb-menu-wrapper">
                      <div class="breadcrumb-menu-wrap">
                          <div class="breadcrumb-menu">
                              <ul>
-                                 <li><a href="index.html">Home</a></li>
+                                 <li><a href="{{ url('/') }}">Home</a></li>
                                  <li><img src="{{ asset('frontend/assets/images/blog/right-arrow.svg') }}" alt="right-arrow">
                                  </li>
-                                 <li aria-current="page">Blog Details</li>
+                                 <li><a href="{{ route('blog.page') }}">Blogs</a></li>
+                                 <li><img src="{{ asset('frontend/assets/images/blog/right-arrow.svg') }}" alt="right-arrow">
+                                 </li>
+                                 <li aria-current="page">{{ $post->post_title }}</li>
                              </ul>
                          </div>
                      </div>
@@ -47,14 +50,17 @@
                              <h2><a href="single-blog.html">{{ $post->post_title }}</a></h2>
                              <p>{!! $post->post_description !!}</p>
                          </div>
-                         
+
                          <div class="lonyo-blog-d-content-wrap">
                              <div class="lonyo-blog-widgets widgets2">
-                                 <h4>Tags</h4>
+                                 <h4>Category</h4>
                                  <div class="lonyo-blog-tags">
                                      <ul>
-                                         <li><a href="blog.html">Software</a></li>
-                                         <li><a href="blog.html">Business</a></li>
+                                         @foreach ($blogCategories as $bCat)
+                                             @if ($bCat->id == $post->category->id)
+                                                 <li><a href="blog.html">{{ $bCat->category_name }}</a></li>
+                                             @endif
+                                         @endforeach
                                      </ul>
                                  </div>
                              </div>
@@ -110,72 +116,6 @@
                                  </ul>
                              </div>
                          </div>
-                         <div class="lonyo-blog-d-comment-box">
-                             <h4>Comments:</h4>
-                             <div class="lonyo-blog-d-comment-wrap1">
-                                 <div class="lonyo-blog-d-comment-thumb">
-                                     <img src="assets/images/blog/b8.png" alt="">
-                                 </div>
-                                 <div class="lonyo-blog-d-comment-data1">
-                                     <h5>Vicky Smith</h5>
-                                     <span>June 21, 2025</span>
-                                     <p>After reading the blog, I understand personal finance is exigent. Personal finance
-                                         isn't just a way to track your spending.</p>
-                                 </div>
-                                 <div class="reply-btn">
-                                     <a href="single-blog.html">Reply</a>
-                                 </div>
-                             </div>
-                             <div class="lonyo-blog-d-comment-wrap pl-101">
-                                 <div class="lonyo-blog-d-comment-thumb">
-                                     <img src="assets/images/blog/b9.png" alt="">
-                                 </div>
-                                 <div class="lonyo-blog-d-comment-data">
-                                     <h5>Adam Mac</h5>
-                                     <span>September 22, 2025</span>
-                                     <p>It's a tool to secure financial future, helping consumers track spending, pay bills,
-                                         budgets and create savings.</p>
-                                 </div>
-                                 <div class="reply-btn">
-                                     <a href="single-blog.html">Reply</a>
-                                 </div>
-                             </div>
-                             <div class="lonyo-blog-d-comment-wrap1 wrap2">
-                                 <div class="lonyo-blog-d-comment-thumb">
-                                     <img src="assets/images/blog/b10.png" alt="">
-                                 </div>
-                                 <div class="lonyo-blog-d-comment-data1">
-                                     <h5>William Thomas</h5>
-                                     <span>June 21, 2025</span>
-                                     <p>Yes exactly! Personal finance software gives a clear picture of your situation by
-                                         effortlessly organizing & tracking expenses.</p>
-                                 </div>
-                                 <div class="reply-btn">
-                                     <a href="single-blog.html">Reply</a>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="lonyo-blog-d-comment-box2" data-aos="fade-up" data-aos-duration="700">
-                             <h4>Leave a comments:</h4>
-                             <div class="lonyo-contact-box">
-                                 <form action="#">
-                                     <div class="lonyo-main-field">
-                                         <p>Full name*</p>
-                                         <input type="text" placeholder="Enter your name">
-                                     </div>
-                                     <div class="lonyo-main-field">
-                                         <p>Email address*</p>
-                                         <input type="email" placeholder="Your email address">
-                                     </div>
-                                     <p>Message</p>
-                                     <div class="lonyo-main-field-textarea">
-                                         <textarea class="button-text" name="textarea" placeholder="Write your message here..."></textarea>
-                                     </div>
-                                     <button class="lonyo-default-btn extra-btn d-block" type="button">Submit A
-                                         Comment</button>
-                                 </form>
-                             </div>
-                         </div>
                      </div>
                  </div>
                  <div class="col-lg-4">
@@ -224,71 +164,9 @@
                      </div>
                  </div>
              </div>
-             <div class="deivdead-line"></div>
-             <div class="lonyo-section-title center max-width-700">
-                 <h2>Check out the related articles and news</h2>
-             </div>
-             <div class="row">
-                 <div class="col-lg-6">
-                     <div class="lonyo-blog-wrap" data-aos="fade-up" data-aos-duration="700">
-                         <div class="lonyo-blog-thumb">
-                             <img src="assets/images/blog/b11.png" alt="">
-                         </div>
-                         <div class="lonyo-blog-meta">
-                             <ul>
-                                 <li>
-                                     <a href="blog.html"><img src="assets/images/blog/date.svg" alt="">June 10,
-                                         2025</a>
-                                 </li>
-                                 <li>
-                                     <a href="blog.html"><img src="assets/images/blog/clock.svg" alt="">7 min
-                                         read</a>
-                                 </li>
-                             </ul>
-                         </div>
-                         <div class="lonyo-blog-content">
-                             <a href="blog.html">
-                                 <h2>Top 10 disruptive technologies in finance</h2>
-                             </a>
-                             <p>As finance goes digital, technology and financial services have become inseparable, with
-                                 fintech leading global investment...</p>
-                         </div>
-                         <div class="lonyo-blog-btn">
-                             <a href="blog.html" class="lonyo-default-btn blog-btn">continue reading</a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-lg-6">
-                     <div class="lonyo-blog-wrap" data-aos="fade-up" data-aos-duration="900">
-                         <div class="lonyo-blog-thumb">
-                             <img src="assets/images/blog/b2.png" alt="">
-                         </div>
-                         <div class="lonyo-blog-meta">
-                             <ul>
-                                 <li>
-                                     <a href="blog.html"><img src="assets/images/blog/date.svg" alt="">June 08,
-                                         2025</a>
-                                 </li>
-                                 <li>
-                                     <a href="blog.html"><img src="assets/images/blog/clock.svg" alt="">2 min
-                                         read</a>
-                                 </li>
-                             </ul>
-                         </div>
-                         <div class="lonyo-blog-content">
-                             <a href="blog.html">
-                                 <h2>Business finance apps to save you time</h2>
-                             </a>
-                             <p>Small business owners can save time and money by using automation tools as they prepare for
-                                 tax season...</p>
-                         </div>
-                         <div class="lonyo-blog-btn">
-                             <a href="blog.html" class="lonyo-default-btn blog-btn">continue reading</a>
-                         </div>
-                     </div>
-                 </div>
-             </div>
          </div>
      </div>
      <!-- end blog -->
+
+     @include('home.homelayout.apps')
  @endsection

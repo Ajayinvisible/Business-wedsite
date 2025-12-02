@@ -29,7 +29,7 @@
                                 <a href="#">Portfolio</a>
                             </li>
                             <li>
-                                <a href="#">Blog</a>
+                                <a href="{{ route('blog.page') }}">Blog</a>
                             </li>
                             <li>
                                 <a href="contact-us.html">Contact</a>
